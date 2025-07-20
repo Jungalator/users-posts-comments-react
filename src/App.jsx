@@ -1,8 +1,10 @@
+import { UserPostsComments } from "./pages/UserPostsComments";
+
 function App() {
   return (
-    <>
-      <h1>Vite + React</h1>
-    </>
+    <div className="w-[100%] h-[100%] min-h-[100vh] box-border">
+      <UserPostsComments />
+    </div>
   );
 }
 
