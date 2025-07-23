@@ -1,5 +1,4 @@
-import { Comment } from "../comments/Comment";
-
+import { Comments } from "../comments/Comments";
 export const Post = ({
   post,
   handleVisibleComments,
@@ -9,33 +8,21 @@ export const Post = ({
   user,
 }) => {
   return (
-    <li className="mb-5 shadow-lg border-none rounded-lg p-3">
-      <h4 className="text-shadow-md text-xl text-neutral-700 mb-3">
+    <li className="mb-5 shadow-lg dark:shadow-blue-400 border-none rounded-lg p-3">
+      <h4 className="text-shadow-xs dark:text-shadow-blue-400 text-xl text-neutral-700 dark:text-blue-400 mb-3">
         {user.username}
       </h4>
-      <h4 className=" mb-2 font-bold text-neutral-700 ">{post.title}</h4>
-      <p className="text-neutral-600 mb-2.5">{post.body}</p>
-      <details onClick={handleVisibleComments}>
-        <summary className="text-neutral-500 cursor-pointer">Comments</summary>
-
-        {commentsIsVisible && (
-          <ul className="shadow-lg border-t-[1px] border-neutral-100 p-2.5">
-            {comments
-              .filter((comment) => comment.postId === post.id)
-              .map(({ email, name, body, id }) => {
-                return (
-                  <Comment
-                    email={email}
-                    name={name}
-                    body={body}
-                    key={id}
-                    isLoadingComments={isLoadingComments}
-                  />
-                );
-              })}
-          </ul>
-        )}
-      </details>
+      <h4 className=" mb-2 font-bold text-neutral-700 dark:text-white">
+        {post.title}
+      </h4>
+      <p className="text-neutral-600 mb-2.5 dark:text-white">{post.body}</p>
+      <Comments
+        handleVisibleComments={handleVisibleComments}
+        isLoadingComments={isLoadingComments}
+        commentsIsVisible={commentsIsVisible}
+        comments={comments}
+        post={post}
+      />
     </li>
   );
 };

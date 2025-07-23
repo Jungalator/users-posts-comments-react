@@ -11,7 +11,7 @@ export const Posts = ({
   commentsIsVisible,
 }) => {
   return (
-    <div className="w-[75%] overflow-y-scroll shadow-lg bg-white mx-auto">
+    <div className="w-[75%] overflow-y-scroll shadow-lg bg-white dark:bg-gray-800 mx-auto">
       {isLoadingPosts ? (
         <p>Loading...</p>
       ) : (

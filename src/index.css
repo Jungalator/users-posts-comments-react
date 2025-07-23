@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer components {
-  .current-user {
-    @apply mb-3 w-[100%] bg-blue-100 text-neutral-700 p-2 cursor-pointer border-none rounded-lg inset-shadow-sm shadow-none;
-  }
   .user {
-    @apply mb-3 w-[100%] bg-blue-100 text-neutral-700 shadow-md p-2 cursor-pointer border-none rounded-lg hover:inset-shadow-sm hover:shadow-none;
+    @apply mb-3 w-[100%] bg-blue-100 text-neutral-700 shadow-md p-2 cursor-pointer border-0 rounded-lg hover:inset-shadow-sm hover:shadow-none;
+  }
+
+  .dark-user {
+    @apply dark:mb-3 w-[100%] dark:bg-gray-800 dark:text-blue-400 dark:p-2 dark:cursor-pointer dark:border dark:border-blue-400 dark:rounded-lg dark:hover:shadow-lg dark:hover:shadow-blue-400/50;
   }
 }
 
