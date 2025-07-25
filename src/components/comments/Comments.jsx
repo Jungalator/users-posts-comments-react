@@ -1,22 +1,25 @@
 import { Comment } from "./Comment";
+import Skeleton from "react-loading-skeleton";
 
 export const Comments = ({
   comments,
-  commentsIsVisible,
+  showComments,
   isLoadingComments,
-  handleVisibleComments,
+  toggleCommentsVisibility,
   post,
 }) => {
   return (
-    <details onToggle={handleVisibleComments}>
-      <summary className="text-neutral-500 cursor-pointer dark:text-blue-400 mb-3">
-        Comments ↓
+    <details
+      onToggle={() => toggleCommentsVisibility(post.id)}
+      className=" dark:hover:shadow-blue-400"
+    >
+      <summary className="inline-block text-neutral-500 hover:text-neutral-700 cursor-pointer dark:text-blue-400 dark:hover:text-blue-500 mb-3">
+        {showComments[post.id] ? "Comments ▲" : "Comments ▼"}
       </summary>
-
-      {commentsIsVisible && (
+      {showComments[post.id] && (
         <ul className="shadow-lg  border-neutral-100 p-2.5 border-t-[1px] dark:border-blue-400">
           {isLoadingComments ? (
-            <li className="text-neutral-600">Loading...</li>
+            <Skeleton count={4} />
           ) : (
             comments
               .filter((comment) => comment.postId === post.id)

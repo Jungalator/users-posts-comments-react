@@ -1,12 +1,19 @@
 import { User } from "./User.jsx";
+import Skeleton from "react-loading-skeleton";
 
 export const Users = ({ usersData, handleSelectUser, isLoadingUsers }) => {
   return (
     <aside className="w-[22%] bg-white dark:bg-gray-800 overflow-y-scroll">
-      {isLoadingUsers ? (
-        <p>Loading...</p>
-      ) : (
-        <ul className=" p-3">
+      <ul className=" p-3">
+        {isLoadingUsers ? (
+          <Skeleton
+            count={10}
+            width={"100%"}
+            height={30}
+            className="mb-3"
+            baseColor="lightgray"
+          />
+        ) : (
           <li>
             <button
               id="all"
@@ -16,17 +23,17 @@ export const Users = ({ usersData, handleSelectUser, isLoadingUsers }) => {
               All
             </button>
           </li>
-          {usersData.map((user) => {
-            return (
-              <User
-                user={user}
-                key={user.id}
-                handleSelectUser={handleSelectUser}
-              />
-            );
-          })}
-        </ul>
-      )}
+        )}
+        {usersData.map((user) => {
+          return (
+            <User
+              user={user}
+              key={user.id}
+              handleSelectUser={handleSelectUser}
+            />
+          );
+        })}
+      </ul>
     </aside>
   );
 };

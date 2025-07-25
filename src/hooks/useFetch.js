@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 export const useFetch = (url) => {
   const [value, setValue] = useState([]);
@@ -9,11 +10,16 @@ export const useFetch = (url) => {
       setIsLoading(true);
       try {
         const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(
+            `Ошибка HTTP запроса или сервера: ${response.status}`
+          );
+        }
         const result = await response.json();
 
         setValue(result);
       } catch (error) {
-        console.log(`Ошибка HTTP запроса или сервера: ${error}`);
+        toast.error(error.message);
       } finally {
         setIsLoading(false);
       }
